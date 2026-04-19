@@ -1,0 +1,23 @@
+# Vercel
+.vercel
+.env*.local
+
+# Proprietary / internal docs
+README_Supreme_Hedge_Fund.md
+
+# Internal design assets
+UI:UX GenA/
+
+# Large media files
+*.mov
+*.mp4
+
+# Dev-only files (contains hardcoded creds — DO NOT commit)
+server.mjs
+
+# Build output
+dist/
+node_modules/
+
+# OS
+.DS_Store

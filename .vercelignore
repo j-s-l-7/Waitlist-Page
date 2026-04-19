@@ -1,0 +1,11 @@
+# Standard ignores
+.DS_Store
+.vercel/
+node_modules/
+
+# Environment
+.env.local
+
+# Large media files
+*.mov
+*.mp4

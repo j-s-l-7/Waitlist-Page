@@ -1,0 +1,89 @@
+/* =============================================================================
+   DESIGN TOKENS — Centralised spacing, typography, breakpoints
+   All layout-critical values are defined here as CSS custom properties.
+   Change these tokens to update the entire app uniformly.
+   ============================================================================= */
+
+:root {
+    /* ── Breakpoints (for reference, used in @media queries) ──────────────── */
+    /* --bp-sm:  375px   ultra-small phones (iPhone SE) */
+    /* --bp-md:  480px   standard phones (iPhone 15) */
+    /* --bp-lg:  768px   tablets */
+    /* --bp-xl:  1024px  small laptops */
+    /* --bp-2xl: 1440px  desktops */
+    /* --bp-3xl: 1920px  large monitors */
+
+    /* ── Spacing scale (rem-based, 1rem = 16px) ──────────────────────────── */
+    --space-1: 0.25rem;
+    /* 4px */
+    --space-2: 0.5rem;
+    /* 8px */
+    --space-3: 0.75rem;
+    /* 12px */
+    --space-4: 1rem;
+    /* 16px */
+    --space-5: 1.25rem;
+    /* 20px */
+    --space-6: 1.5rem;
+    /* 24px */
+    --space-8: 2rem;
+    /* 32px */
+    --space-10: 2.5rem;
+    /* 40px */
+    --space-12: 3rem;
+    /* 48px */
+    --space-16: 4rem;
+    /* 64px */
+    --space-20: 5rem;
+    /* 80px */
+    --space-24: 6rem;
+    /* 96px */
+
+    /* ── Typography ──────────────────────────────────────────────────────── */
+    --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --font-serif: 'Playfair Display', 'Georgia', serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+
+    /* Fluid font sizes: clamp(min, preferred, max) */
+    --text-xs: clamp(0.6875rem, 0.65rem + 0.19vw, 0.75rem);
+    /* 11-12px */
+    --text-sm: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+    /* 12-14px */
+    --text-base: clamp(0.875rem, 0.83rem + 0.22vw, 1rem);
+    /* 14-16px */
+    --text-lg: clamp(1rem, 0.92rem + 0.4vw, 1.25rem);
+    /* 16-20px */
+    --text-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.75rem);
+    /* 20-28px */
+    --text-2xl: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+    /* 24-36px */
+    --text-3xl: clamp(2rem, 1.6rem + 2vw, 3rem);
+    /* 32-48px */
+    --text-4xl: clamp(2.5rem, 2rem + 2.5vw, 4rem);
+    /* 40-64px */
+
+    /* ── Layout ──────────────────────────────────────────────────────────── */
+    --container-width: min(92vw, 1200px);
+    --card-radius: 0.75rem;
+    /* 12px */
+    --card-padding: var(--space-4);
+
+    /* ── Dashboard design dimensions ───────────────────────────────────── */
+    --dashboard-design-width: 920px;
+    --dashboard-design-height: 950px;
+
+    /* ── Colors (semantic) ─────────────────────────────────────────────── */
+    --color-bg: #ffffff;
+    --color-text: #1a1a1a;
+    --color-text-muted: #64748b;
+    --color-border: rgba(0, 0, 0, 0.08);
+    --color-accent: #3b82f6;
+    --color-success: #10b981;
+    --color-danger: #ef4444;
+
+    /* ── Safe area (for notched/home-bar iPhones) ──────────────────────── */
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-left: env(safe-area-inset-left, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
+}
