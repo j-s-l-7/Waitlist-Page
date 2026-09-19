@@ -1,4 +1,4 @@
-# Analyez Waitlist — Operational Frontend
+# Analyez — Operational Frontend
 
 This is the frontend codebase for the **Analyez** waitlist page (deployed at [analyez.com](https://analyez.com)). It features an immersive, engaging UI designed to showcase the "Agentic Investing" concept and capture early user interest.
 
