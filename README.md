@@ -38,13 +38,13 @@ Operational Frontend/
 └── package.json          # Dependencies and npm scripts
 ```
 
-There is no `vercel.json`: Vercel's defaults (Vite build, `api/` functions) are used.
+`vercel.json` pins the API functions to Vercel's Singapore region (`sin1`), next to the Supabase database (`ap-southeast-1`), and allows up to 60 s per function so a slow pooler moment does not cut a signup off. Everything else uses Vercel's defaults (Vite build, `api/` functions).
 
 ## Key Features
 
 1. **Immersive Hero Animation:** A state-machine-driven sequence (`ImmersiveHero.tsx`) that simulates an AI generating a portfolio based on a user prompt.
 2. **Contextual Onboarding:** The UI transitions from a simple search-like interface to a complex data dashboard seamlessly.
-3. **Waitlist Capture:** A floating Call-to-Action (`FloatingCTA.tsx`) that validates the email, posts it to `/api/waitlist`, and shows the user's position only after the API confirms the signup. Failures (including a 10 s request timeout) show an inline error with a retry; already-registered emails are told their existing position. The success modal links to the WhatsApp community (https://chat.whatsapp.com/EIYeyk69kfAJfUWsTN0vc2) as a plain link, not a popup.
+3. **Waitlist Capture:** A floating Call-to-Action (`FloatingCTA.tsx`) that validates the email, posts it to `/api/waitlist`, and shows the user's position only after the API confirms the signup. Failures (including a 40 s request timeout) show an inline error with a retry; already-registered emails are told their existing position. The success modal links to the WhatsApp community (https://chat.whatsapp.com/EIYeyk69kfAJfUWsTN0vc2) as a plain link, not a popup.
 4. **Device memory:** after a successful signup the browser stores `analyez_waitlist_joined` in `localStorage`, so returning visitors see "You are #N"; the modal's "Join with a different email" clears it. After a server (5xx), 429, network or timeout failure the email is stored as `analyez_waitlist_pending` and POSTed once silently on the next visit; the honest error is still shown and success is never faked. Attempts are at least 2 s apart.
 
 ## API
@@ -61,7 +61,7 @@ Each signup gets a stored `rank` (1, 2, 3, ...) assigned inside a transaction un
 
 ### Reliability
 
-* One `pg` connection per function instance (`max: 1`), 5 s connect timeout.
+* One `pg` connection per function instance (`max: 1`), 15 s connect timeout, connections kept warm for 30 s. Measured against the shared pooler: about 0.6 s to connect normally, about 3 s during bursts, with occasional spikes to about 12 s.
 * A query that fails with a transient connection error (`ECONNRESET`, `ECONNREFUSED`, `ETIMEDOUT`, `EPIPE`, `57P01`, `57P03`, `08000`, `08003`, `08006`, "Connection terminated") is retried once after 250 ms on a freshly created pool. SQL and constraint errors are never retried.
 * A signup is one transaction on one connection: `BEGIN`, advisory lock, lookup by `lower(email)`, `INSERT ... RETURNING rank`, `COMMIT`. A transient error before `COMMIT` retries the whole transaction once; a failure during `COMMIT` is never retried. The unique index on `lower(email)` is the final guard (error `23505` is answered as "already registered").
 * SSL query params in `DATABASE_URL` (`sslmode`, `sslrootcert`, ...) are stripped so the explicit TLS settings below always apply.

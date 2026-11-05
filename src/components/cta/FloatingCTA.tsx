@@ -98,7 +98,8 @@ type PostResult =
     | { kind: 'invalid' }
     | { kind: 'failed'; status: number | null; timedOut?: boolean };
 
-const SIGNUP_TIMEOUT_MS = 10000;
+// Above the worst-case server path (15s connect + one retry) so slow pooler moments still succeed.
+const SIGNUP_TIMEOUT_MS = 40000;
 
 async function postSignup(email: string): Promise<PostResult> {
     // Never let the UI hang: abort after SIGNUP_TIMEOUT_MS (retryable failure).

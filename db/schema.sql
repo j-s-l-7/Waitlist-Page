@@ -12,7 +12,10 @@
 -- always schema-qualifies `waitlist.signups` (the pooler's search_path does
 -- not include `waitlist`). The Supabase Data API roles get no access.
 
-SET statement_timeout = '15s';
+-- One transaction; SET LOCAL keeps the timeout from leaking onto a pooled
+-- server connection (Supabase's transaction pooler shares connections).
+BEGIN;
+SET LOCAL statement_timeout = '15s';
 
 CREATE SCHEMA IF NOT EXISTS waitlist;
 
@@ -64,3 +67,5 @@ REVOKE ALL ON ALL SEQUENCES IN SCHEMA waitlist FROM anon, authenticated, public;
 -- transaction and inserts with rank = coalesce(max(rank), 0) + 1, so ranks are
 -- unique and stable (deleting a row leaves a gap; later numbers do not shift).
 -- Displayed number = (rank <= 9 ? 770 + rank : 7761 + rank).
+
+COMMIT;

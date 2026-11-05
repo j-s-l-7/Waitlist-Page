@@ -42,8 +42,8 @@ export function poolConfig() {
         // One connection per serverless instance; the Supabase transaction
         // pooler (port 6543) multiplexes these onto a few real connections.
         max: 1,
-        connectionTimeoutMillis: 5000,
-        idleTimeoutMillis: 10000,
+        connectionTimeoutMillis: 15000, // measured: ~0.6s typical, ~3s in bursts, spikes to ~12s on the shared pooler
+        idleTimeoutMillis: 30000, // keep a warm instance's connection longer: fewer slow connects
     };
 }
 
