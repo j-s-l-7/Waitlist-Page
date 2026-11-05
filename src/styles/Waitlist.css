@@ -9223,6 +9223,52 @@ body {
   transform: scale(0.95);
 }
 
+/* Error State (shown above the input pill) */
+.fcta-error {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: 10px 12px 10px 18px;
+  border-radius: 999px;
+  background: rgba(20, 20, 28, 0.92);
+  border: 1px solid var(--color-danger, #ef4444);
+  color: #fff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  max-width: calc(100vw - 32px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  animation: fcta-fade-in 0.2s ease;
+}
+
+.fcta-error-note {
+  display: block;
+  margin-top: 2px;
+  opacity: 0.75;
+  font-size: 0.8rem;
+  white-space: normal;
+}
+
+.fcta-error-retry {
+  border: none;
+  border-radius: 999px;
+  padding: 6px 14px;
+  background: #fff;
+  color: #4f5aff;
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.fcta-error-retry:hover {
+  opacity: 0.9;
+}
+
 /* Submitting State */
 .fcta-pill-submitting {
   min-width: 300px;
@@ -9386,6 +9432,44 @@ body {
   transform: scale(1.04);
 }
 
+.fcta-whatsapp-link {
+  display: inline-block;
+  margin: 18px 0 0;
+  padding: 10px 22px;
+  border-radius: 40px;
+  background: #fff;
+  color: #4f5aff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.fcta-whatsapp-link:hover {
+  transform: scale(1.04);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.fcta-different-email {
+  display: block;
+  margin: 10px auto 0;
+  padding: 4px 8px;
+  border: none;
+  background: none;
+  color: #fff;
+  opacity: 0.7;
+  font-size: 0.78rem;
+  text-decoration: underline;
+  cursor: pointer;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.fcta-different-email:hover {
+  opacity: 1;
+}
+
 /* Mobile responsive */
 @media (max-width: 520px) {
   .fcta-pill {
@@ -9413,6 +9497,13 @@ body {
 
   .fcta-pill-submitting {
     min-width: 240px;
+  }
+
+  .fcta-error {
+    white-space: normal;
+    width: calc(100vw - 32px);
+    border-radius: 16px;
+    justify-content: space-between;
   }
 
   .fcta-modal {

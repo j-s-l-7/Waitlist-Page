@@ -4,7 +4,6 @@
  */
 
 import { useState, useEffect, useRef } from 'react';
-import { ArrowRight } from 'lucide-react';
 import { indiaConfig } from './config/india';
 import type { MarketConfig } from './config/india';
 import { usConfig } from './config/us';
@@ -27,38 +26,6 @@ export default function WaitlistPage({ market }: WaitlistPageProps) {
     const [navDark, setNavDark] = useState(false);
     // Lifted state from ImmersiveHero
     const [heroPhase, setHeroPhase] = useState<'idle' | 'writing' | 'loading' | 'result'>('idle');
-    const [waitlistEmail, setWaitlistEmail] = useState('');
-    const [emailSubmitting, setEmailSubmitting] = useState(false);
-    const [emailSubmitted, setEmailSubmitted] = useState(false);
-    const [waitlistPosition, setWaitlistPosition] = useState<number | null>(null);
-
-    const WHATSAPP_LINK = 'https://chat.whatsapp.com/JRpzRy4APUZ8w4vmNiTjek?mode=gi_c';
-
-    const handleWaitlistSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!waitlistEmail || !waitlistEmail.includes('@')) return;
-
-        setEmailSubmitting(true);
-        try {
-            const res = await fetch('/api/waitlist', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: waitlistEmail, market }),
-            });
-            const data = await res.json();
-            if (data?.position) {
-                setWaitlistPosition(data.position);
-            }
-        } catch (err) {
-            console.log('API not available locally, skipping save');
-        }
-        setEmailSubmitted(true);
-        setEmailSubmitting(false);
-        // Redirect to WhatsApp after a brief delay
-        setTimeout(() => {
-            window.open(WHATSAPP_LINK, '_blank');
-        }, 1200);
-    };
     const [isScrolled, setIsScrolled] = useState(false);
     // Track whether immersive experience has completed — prevents scroll lock from re-engaging
     const hasCompletedImmersive = useRef(false);
