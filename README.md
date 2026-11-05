@@ -118,6 +118,14 @@ npm run dev
 vercel dev
 ```
 
+Without the Vercel CLI, `npm run serve:local` builds the site and serves it on http://localhost:4173 with `/api/*` routed to the real handlers (`scripts/local-server.mjs`). It uses `DATABASE_URL` from `.env.local`, so signups made there are **real rows**. Delete test signups afterwards in the Supabase SQL editor:
+
+```sql
+DELETE FROM waitlist.signups WHERE email = 'your-test-email@example.com';
+```
+
+Deleting the highest-ranked row lets the next signup reuse its number, so cleaning up right away (before anyone else signs up) keeps the first real signup at 771.
+
 ### Tests
 
 ```bash

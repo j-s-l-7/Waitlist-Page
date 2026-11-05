@@ -2,8 +2,8 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "regions": ["sin1"],
   "functions": {
-    "api/**/*.js": {
-      "maxDuration": 60
-    }
+    "api/waitlist.js": { "maxDuration": 60 },
+    "api/waitlist/count.js": { "maxDuration": 60 },
+    "api/health.js": { "maxDuration": 60 }
   }
 }
