@@ -209,12 +209,12 @@ export const FeatureAnimation = ({ market, onPhaseChange }: { market: 'india' | 
                                     <div className="ga-metric-item">
                                         <span className="label">Historical returns</span>
                                         <span className="value positive" style={{ color: '#22c55e' }}>+232.23%</span>
-                                        <span className="sub">{market === 'india' ? '+202.2% NIFTY 50' : '+202.2% SENSEX'}</span>
+                                        <span className="sub">{market === 'india' ? '+202.2% NIFTY 50' : '+202.2% S&P 500'}</span>
                                     </div>
                                     <div className="ga-metric-item">
                                         <span className="label">Max drawdown</span>
                                         <span className="value negative" style={{ color: '#ef4444' }}>-18.23%</span>
-                                        <span className="sub">{market === 'india' ? '-61.65% NIFTY 50' : '-61.65% SENSEX'}</span>
+                                        <span className="sub">{market === 'india' ? '-61.65% NIFTY 50' : '-61.65% S&P 500'}</span>
                                     </div>
                                 </div>
                                 <div className="ga-chart-legend">

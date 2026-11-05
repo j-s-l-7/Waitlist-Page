@@ -1,6 +1,7 @@
 # Vercel
 .vercel
 .env*.local
+.env
 
 # Proprietary / internal docs
 README_Supreme_Hedge_Fund.md
